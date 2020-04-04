@@ -51,11 +51,6 @@ public class DetailNeighboursActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Neighbour neighbour = intent.getParcelableExtra("Neighbours");
 
-
-       if(neighbour.isFavorite()) {
-           mApiService.favoriteNeighbourIsOrNotInFavoriteList(neighbour);
-       }
-
         mIsFavorite = neighbour.isFavorite();
         int favoriteImage = mIsFavorite ? R.drawable.ic_star_gold_24dp : R.drawable.ic_star_grey_24dp;
         mFavoriteButton.setImageResource(favoriteImage);
@@ -96,13 +91,11 @@ public class DetailNeighboursActivity extends AppCompatActivity {
                 if (mIsFavorite) {
                     neighbour.setFavorite(false);
                     mApiService.replaceNeighbourByThisNeighbour(neighbour);
-                    mApiService.removeFromFavoriteList(neighbour);
                     mFavoriteButton.setImageResource(R.drawable.ic_star_grey_24dp);
                 }
                 else {
                     neighbour.setFavorite(true);
                     mApiService.replaceNeighbourByThisNeighbour(neighbour);
-                    mApiService.addToFavoriteList(neighbour);
                     mFavoriteButton.setImageResource(R.drawable.ic_star_gold_24dp);
                 }
             }

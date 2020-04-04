@@ -31,10 +31,5 @@ public interface NeighbourApiService {
 
     void replaceNeighbourByThisNeighbour(Neighbour neighbour);
 
-    void favoriteNeighbourIsOrNotInFavoriteList(Neighbour neighbour);
-
-    void removeFromFavoriteList(Neighbour neighbour);
-
-    void addToFavoriteList(Neighbour neighbour);
 }
 
