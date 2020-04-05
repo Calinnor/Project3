@@ -19,7 +19,7 @@ public class DummyNeighbourApiService implements  NeighbourApiService {
         return neighbours;
     }
 
-    public List<Neighbour> getNeighbourIsFavorite() throws IndexOutOfBoundsException {
+    public List<Neighbour> getNeighbourIsFavorite() {
 
         List<Neighbour> favoriteNeighbours = new ArrayList<>();
 

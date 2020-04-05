@@ -14,20 +14,20 @@ public interface NeighbourApiService {
      * Get all my Neighbours
      * @return {@link List}
      */
-    List<Neighbour> getNeighbours();
-    List<Neighbour> getNeighbourIsFavorite();
+    List<Neighbour> getNeighbours();//2 tests
+    List<Neighbour> getNeighbourIsFavorite();//1 test
 
     /**
      * Deletes a neighbour
      * @param neighbour
      */
-    void deleteNeighbour(Neighbour neighbour);
+    void deleteNeighbour(Neighbour neighbour);//3 tests
 
     /**
      * Create a neighbour
      * @param neighbour
      */
-    void createNeighbour(Neighbour neighbour);
+    void createNeighbour(Neighbour neighbour);//3 tests
 
     void replaceNeighbourByThisNeighbour(Neighbour neighbour);
 

@@ -11,7 +11,9 @@ import org.junit.runners.JUnit4;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
@@ -122,10 +124,17 @@ public class NeighbourServiceTest {
         assertTrue(service.getNeighbours().size() == 13);
     }
 
+    /**
+     * base neighbour list hasn't favorite. expected null
+     */
+    @Test
+    public void getNeighbourIsFavoriteWithSucces() {
+            List<Neighbour> neighbours = service.getNeighbours();
+            List<Neighbour> expectedNeighbours = service.getNeighbourIsFavorite();
+            assertArrayEquals((boolean[]) null, null);
+    }
 
 
 
+    }
 
-
-
-}
