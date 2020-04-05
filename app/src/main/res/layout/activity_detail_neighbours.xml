@@ -5,19 +5,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_weight="100"
     android:background="#ECF2F8"
     tools:context=".ui.neighbour_list.DetailNeighboursActivity">
 
     <ImageView
         android:id="@+id/detail_avatar_view"
         android:layout_width="match_parent"
-        android:layout_height="275dp"
+        android:layout_height="0dp"
+        app:layout_constraintVertical_weight="40"
         android:layout_marginBottom="10dp"
         android:scaleType="center"
         app:layout_constraintBottom_toTopOf="@+id/detail_cardview_one"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></ImageView>
+        app:layout_constraintTop_toTopOf="parent">
+    </ImageView>
 
     <ImageButton
         android:id="@+id/back_button"
@@ -44,12 +47,13 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/detail_cardview_one"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_margin="10dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:elevation="4dp"
         app:cardCornerRadius="4dp"
+        app:layout_constraintVertical_weight="25"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/detail_avatar_view">
@@ -71,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="1sp"
                 android:background="@android:color/white"
-                android:padding="10dp"
+                android:padding="8dp"
                 android:text="firstname"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -86,7 +90,7 @@
                     android:layout_height="wrap_content"
                     android:background="@android:color/white"
                     android:orientation="horizontal"
-                    android:padding="10dp">
+                    android:padding="8dp">
 
                     <ImageView
                         android:layout_width="20dp"
@@ -155,6 +159,7 @@
         android:layout_marginBottom="6dp"
         android:padding="4dp"
         android:elevation="4dp"
+        app:layout_constraintVertical_weight="35"
         app:cardCornerRadius="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -213,10 +218,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="148dp"
+        android:layout_marginBottom="140dp"
+        android:src="@drawable/ic_star_grey_24dp"
         app:backgroundTint="@android:color/white"
         app:layout_constraintBottom_toBottomOf="@+id/detail_cardview_one"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/ic_star_grey_24dp"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
