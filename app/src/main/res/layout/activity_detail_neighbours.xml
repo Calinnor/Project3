@@ -103,7 +103,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="adress"
-                        android:textSize="13sp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -124,7 +124,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="phone"
-                        android:textSize="13sp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -145,7 +145,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="mail"
-                        android:textSize="13sp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -204,7 +204,7 @@
                         android:paddingBottom="4dp"
                         android:background="@android:color/white"
                         android:text="content about me"
-                        android:textSize="13sp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
             </ScrollView>
 

@@ -2,26 +2,18 @@ package com.openclassrooms.entrevoisins.service;
 
 import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.model.Neighbour;
-
-import org.hamcrest.collection.IsIterableContainingInAnyOrder;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -40,17 +32,13 @@ public class NeighbourServiceTest {
     /**
      *service.getNeighbours() return neighbours list
      *service.getNeighbourIsFavorite() return a list of favorite neighbours
-     */
-
-
-    /**
+     *
      * GETNEIGHBOURS TESTS
      *
      * getNeighbour musnt return null value for expectedNeighbour
      */
     @Test
     public void getNeighboursWithSuccessNotNull() {
-        List<Neighbour> neighbours = DummyNeighbourGenerator.DUMMY_NEIGHBOURS;
         Neighbour expectedNeighbour = service.getNeighbours().get(0);
         assertNotNull(expectedNeighbour);
     }
@@ -60,7 +48,6 @@ public class NeighbourServiceTest {
      */
     @Test
     public void getNeighboursWithSuccessSameNeighbour() {
-        List<Neighbour> neighbours = DummyNeighbourGenerator.generateNeighbours();
         Neighbour expectedNeighbour = service.getNeighbours().get(10);
         assertEquals(service.getNeighbours().get(10), expectedNeighbour);
     }
@@ -72,10 +59,9 @@ public class NeighbourServiceTest {
      */
     @Test
     public void deleteNeighbourWithSuccess() {
-        List<Neighbour> neighbours = DummyNeighbourGenerator.generateNeighbours();
         Neighbour neighbourToDelete = service.getNeighbours().get(0);
         service.deleteNeighbour(neighbourToDelete);
-        assertTrue(service.getNeighbours().size() == 11);
+        assertEquals(11, service.getNeighbours().size());
     }
 
     /**
@@ -83,7 +69,6 @@ public class NeighbourServiceTest {
      */
     @Test
     public void deletedNeighbourIsNeighbourToDelete() {
-        List<Neighbour> neighbours = DummyNeighbourGenerator.generateNeighbours();
         Neighbour neighbourToDelete = service.getNeighbours().get(0);
         service.deleteNeighbour(neighbourToDelete);
         assertNotEquals(neighbourToDelete, service.getNeighbours().get(0));
@@ -94,11 +79,10 @@ public class NeighbourServiceTest {
      */
     @Test
     public void deleteNeighbourWithSuccessFromList() {
-        List<Neighbour> neighbours = DummyNeighbourGenerator.generateNeighbours();
         Neighbour neighbourToDelete = service.getNeighbours().get(0);
         neighbourToDelete.setFavorite(true);
         service.deleteNeighbour(neighbourToDelete);
-        assertTrue(!service.getNeighbours().contains(neighbourToDelete));
+        assertFalse(service.getNeighbours().contains(neighbourToDelete));
     }
 
     /**
@@ -106,11 +90,10 @@ public class NeighbourServiceTest {
      */
     @Test
     public void deleteFavoriteNeighbourWithSuccessFromList() {
-        List<Neighbour> neighbours = DummyNeighbourGenerator.generateNeighbours();
         Neighbour neighbourToDelete = service.getNeighbours().get(0);
         neighbourToDelete.setFavorite(true);
         service.deleteNeighbour(neighbourToDelete);
-        assertTrue(!service.getNeighbourIsFavorite().contains(neighbourToDelete));
+        assertFalse(service.getNeighbourIsFavorite().contains(neighbourToDelete));
     }
 
     /**
@@ -118,11 +101,10 @@ public class NeighbourServiceTest {
      */
     @Test
     public void deleteFavoriteNeighbourWithSuccessFromFavoriteList() {
-        List<Neighbour> neighbours = DummyNeighbourGenerator.generateNeighbours();
         Neighbour neighbourToDelete = service.getNeighbours().get(0);
         neighbourToDelete.setFavorite(true);
         service.deleteNeighbour(neighbourToDelete);
-        assertTrue(!service.getNeighbourIsFavorite().contains(neighbourToDelete));
+        assertFalse(service.getNeighbourIsFavorite().contains(neighbourToDelete));
     }
 
 
@@ -146,7 +128,7 @@ public class NeighbourServiceTest {
     public void createNeighbourWithSuccessMakeListUp() {
         Neighbour neighbourToCreate = new Neighbour(25, "Test", "Test", "Test", "Test","Test",false);
         service.createNeighbour(neighbourToCreate);
-        assertTrue(service.getNeighbours().size() == 13);
+        assertEquals(13, service.getNeighbours().size());
     }
 
     /**
@@ -163,7 +145,7 @@ public class NeighbourServiceTest {
     /**
      * GETNEIGHBOURISFAVORITE TESTS
      *
-     * base neighbour list hasn't favorite. expected null
+     * base neighbour list hasn't favorite. expected null...test ok but isnt what i want
      */
     @Test
     public void getNeighbourIsFavoriteWithSucces() {
@@ -177,7 +159,6 @@ public class NeighbourServiceTest {
      */
     @Test
     public void getNeighbourIsFavoriteWithSuccessNotNull() {
-        List<Neighbour> neighbours = DummyNeighbourGenerator.DUMMY_NEIGHBOURS;
         Neighbour expectedNeighbour = service.getNeighbours().get(0);
         expectedNeighbour.setFavorite(true);
         expectedNeighbour = service.getNeighbourIsFavorite().get(0);
@@ -191,7 +172,6 @@ public class NeighbourServiceTest {
      */
     @Test
     public void replaceNeighbourByThisNeighbourWithSucces() {
-        List<Neighbour> neighbours = DummyNeighbourGenerator.DUMMY_NEIGHBOURS;
         Neighbour neighbour = service.getNeighbours().get(5);
         neighbour.setFavorite(true);
         neighbour.setName("Test");

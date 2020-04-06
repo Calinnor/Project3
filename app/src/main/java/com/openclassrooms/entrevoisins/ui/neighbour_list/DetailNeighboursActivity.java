@@ -27,18 +27,8 @@ public class DetailNeighboursActivity extends AppCompatActivity {
 
     private boolean mIsFavorite;
 
-    private ImageButton mbackButton;
-
     private FloatingActionButton mFavoriteButton;
 
-
-    private TextView phone;
-    private TextView adress;
-    private TextView aboutMe;
-    private TextView firstname;
-    private TextView nameOnAvatar;
-    private TextView mail;
-    private ImageView avatar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +37,7 @@ public class DetailNeighboursActivity extends AppCompatActivity {
 
         mApiService = DI.getNeighbourApiService();
         mFavoriteButton = findViewById(R.id.detail_add_favorite_neighbour_floating_button);
-        mbackButton = findViewById(R.id.back_button);
+        ImageButton mbackButton = findViewById(R.id.back_button);
         mbackButton.setOnClickListener(v -> DetailNeighboursActivity.this.finish());
 
         Intent intent = getIntent();
@@ -58,48 +48,45 @@ public class DetailNeighboursActivity extends AppCompatActivity {
         mFavoriteButton.setImageResource(favoriteImage);
 
         String getPhone = neighbour.getPhoneNumber();
-        phone = findViewById(R.id.detail_phone);
+        TextView phone = findViewById(R.id.detail_phone);
         phone.setText(getPhone);
 
         String getAdress = neighbour.getAddress();
-        adress = findViewById(R.id.detail_adress);
+        TextView adress = findViewById(R.id.detail_adress);
         adress.setText(getAdress);
 
         String getAboutMe = neighbour.getAboutMe();
-        aboutMe = findViewById(R.id.detail_about_me);
+        TextView aboutMe = findViewById(R.id.detail_about_me);
         aboutMe.setText(getAboutMe);
 
         String getFirstname =neighbour.getName();
-        firstname = findViewById(R.id.detail_firstname);
+        TextView firstname = findViewById(R.id.detail_firstname);
         firstname.setText(getFirstname);
 
-        nameOnAvatar = findViewById(R.id.detail_firstname_on_avatar_image);
+        TextView nameOnAvatar = findViewById(R.id.detail_firstname_on_avatar_image);
         nameOnAvatar.setText(getFirstname);
 
         String getMail = neighbour.getName();
-        mail = findViewById(R.id.detail_mail);
+        TextView mail = findViewById(R.id.detail_mail);
         mail.setText("www.facebook.com/"+getMail);
 
         String getAvatar = neighbour.getAvatarUrl();
-        avatar = findViewById(R.id.detail_avatar_view);
+        ImageView avatar = findViewById(R.id.detail_avatar_view);
         Glide.with(this)
                 .load(getAvatar)
                 .into(avatar);
 
-        mFavoriteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        mFavoriteButton.setOnClickListener(v -> {
 
-                if (mIsFavorite) {
-                    neighbour.setFavorite(false);
-                    mApiService.replaceNeighbourByThisNeighbour(neighbour);
-                    mFavoriteButton.setImageResource(R.drawable.ic_star_grey_24dp);
-                }
-                else {
-                    neighbour.setFavorite(true);
-                    mApiService.replaceNeighbourByThisNeighbour(neighbour);
-                    mFavoriteButton.setImageResource(R.drawable.ic_star_gold_24dp);
-                }
+            if (mIsFavorite) {
+                neighbour.setFavorite(false);
+                mApiService.replaceNeighbourByThisNeighbour(neighbour);
+                mFavoriteButton.setImageResource(R.drawable.ic_star_grey_24dp);
+            }
+            else {
+                neighbour.setFavorite(true);
+                mApiService.replaceNeighbourByThisNeighbour(neighbour);
+                mFavoriteButton.setImageResource(R.drawable.ic_star_gold_24dp);
             }
         });
 
