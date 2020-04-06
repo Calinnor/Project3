@@ -1,15 +1,12 @@
 package com.openclassrooms.entrevoisins.service;
-
 import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.model.Neighbour;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import java.util.List;
-
-import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
@@ -42,7 +39,14 @@ public class NeighbourServiceTest {
         Neighbour expectedNeighbour = service.getNeighbours().get(0);
         assertNotNull(expectedNeighbour);
     }
-
+    /**
+     * try to get a neighbour out of list size
+     */
+    @Test (expected = IndexOutOfBoundsException.class )
+    public void getNeighboursOutOfList() {
+        Neighbour expectedNeighbour = service.getNeighbours().get(service.getNeighbours().size()+1);
+        assertTrue(service.getNeighbours().contains(expectedNeighbour));
+    }
     /**
      * get in index Neighbour and return neighbour must be same
      */
@@ -51,6 +55,7 @@ public class NeighbourServiceTest {
         Neighbour expectedNeighbour = service.getNeighbours().get(10);
         assertEquals(service.getNeighbours().get(10), expectedNeighbour);
     }
+
 
     /**
      *DELETENEIGHBOURS TESTS
@@ -63,7 +68,6 @@ public class NeighbourServiceTest {
         service.deleteNeighbour(neighbourToDelete);
         assertEquals(11, service.getNeighbours().size());
     }
-
     /**
      * once deleted, neighbour in index x musnt be same as the one (the deleted) coming from this index
      */
@@ -73,7 +77,6 @@ public class NeighbourServiceTest {
         service.deleteNeighbour(neighbourToDelete);
         assertNotEquals(neighbourToDelete, service.getNeighbours().get(0));
     }
-
     /**
      * once deleted neighbour musnt be in list neighbours
      */
@@ -84,7 +87,6 @@ public class NeighbourServiceTest {
         service.deleteNeighbour(neighbourToDelete);
         assertFalse(service.getNeighbours().contains(neighbourToDelete));
     }
-
     /**
      * once deleted favoriteNeighbour musnt be in list neighbours
      */
@@ -95,7 +97,6 @@ public class NeighbourServiceTest {
         service.deleteNeighbour(neighbourToDelete);
         assertFalse(service.getNeighbourIsFavorite().contains(neighbourToDelete));
     }
-
     /**
      * once deleted favoriteNeighbour musnt be in list favoriteNeighbours
      */
@@ -105,6 +106,14 @@ public class NeighbourServiceTest {
         neighbourToDelete.setFavorite(true);
         service.deleteNeighbour(neighbourToDelete);
         assertFalse(service.getNeighbourIsFavorite().contains(neighbourToDelete));
+    }
+    /**
+     * try to delete neighbour not in list size
+     */
+    @Test (expected = IndexOutOfBoundsException.class)
+    public void deleteNeighbourOutOfListSize() {
+        Neighbour neighbourToDelete = service.getNeighbours().get(service.getNeighbours().size()+1);
+        service.deleteNeighbour(neighbourToDelete);
     }
 
 
@@ -120,7 +129,6 @@ public class NeighbourServiceTest {
         service.createNeighbour(neighbourToCreate);
         assertTrue(service.getNeighbours().contains(neighbourToCreate));
     }
-
     /**
      * base list size is 12 may find 13
      */
@@ -130,7 +138,6 @@ public class NeighbourServiceTest {
         service.createNeighbour(neighbourToCreate);
         assertEquals(13, service.getNeighbours().size());
     }
-
     /**
      *  base list size 12(index 11 max), add a new test neighbour in size 13 (index 12 max) control if created neighbour in 12 is added neighbour
      */
@@ -145,15 +152,14 @@ public class NeighbourServiceTest {
     /**
      * GETNEIGHBOURISFAVORITE TESTS
      *
-     * base neighbour list hasn't favorite. expected null...test ok but isnt what i want
+     * base neighbour list hasn't favorite. expected IndexOutOfBoundsException
      */
-    @Test
-    public void getNeighbourIsFavoriteWithSucces() {
-        List<Neighbour> neighbours = service.getNeighbours();
-        List<Neighbour> expectedNeighbours = service.getNeighbourIsFavorite();
-        assertArrayEquals((boolean[]) null, null);
+    //TODO test ok when test alone but incorrect with global test
+    @Test (expected = IndexOutOfBoundsException.class)
+    public void getFavoriteNeighboursWithSuccessFromEmptyList() {
+        Neighbour expectedNeighbours = service.getNeighbourIsFavorite().get(5);
+        assertTrue(service.getNeighbourIsFavorite().contains(expectedNeighbours));
     }
-
     /**
      * add a favoriteNeighbour to Neighbours list and check it is get from favoriteList
      */
@@ -164,6 +170,18 @@ public class NeighbourServiceTest {
         expectedNeighbour = service.getNeighbourIsFavorite().get(0);
         assertNotNull(expectedNeighbour);
     }
+    /**
+     *  try to get favorite neighbour out of list size
+     */
+    @Test (expected = IndexOutOfBoundsException.class)
+    public void getNeighbourIsFavoriteOutOfListSize() {
+        Neighbour expectedNeighbour = service.getNeighbours().get(0);
+        expectedNeighbour.setFavorite(true);
+        expectedNeighbour = service.getNeighbourIsFavorite().get(service.getNeighbours().size()+1);
+        assertNotNull(expectedNeighbour);
+    }
+
+
 
     /**
      * REPLACENEIGHBOURBYTHISNEIGHBOUR TEST
@@ -179,5 +197,16 @@ public class NeighbourServiceTest {
         Neighbour neighbourExpected = service.getNeighbours().get(5);
         assertEquals(neighbourExpected, neighbour);
     }
+    /**
+     * try to replace neighbour without index, expected ArrayIndexOutOfBoundsException
+     */
+    @Test (expected = ArrayIndexOutOfBoundsException.class)
+    public void replaceNeighbourCantReplace() {
+        Neighbour testNeighbour = new Neighbour(25, "Test", "Test", "Test", "Test","Test",false);
+        service.replaceNeighbourByThisNeighbour(testNeighbour);
+        assertTrue(service.getNeighbours().contains(testNeighbour));
+    }
+
+
 }
 
