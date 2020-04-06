@@ -19,8 +19,8 @@ public class DummyNeighbourApiService implements  NeighbourApiService {
         return neighbours;
     }
 
-    public List<Neighbour> getNeighbourIsFavorite() {
 
+    public List<Neighbour> getNeighbourIsFavorite() {
         List<Neighbour> favoriteNeighbours = new ArrayList<>();
 
         for (Neighbour neighbour : neighbours) {
@@ -57,5 +57,6 @@ public class DummyNeighbourApiService implements  NeighbourApiService {
         int neighboursIndexToChange = neighbours.indexOf(neighbour);
         neighbours.set(neighboursIndexToChange, neighbour);
     }
+
 
 }//fin class
