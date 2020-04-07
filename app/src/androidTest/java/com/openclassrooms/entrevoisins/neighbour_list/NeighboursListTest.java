@@ -86,6 +86,9 @@ public class NeighboursListTest {
         //si c'est bon, c'est que le detailActivity est lancé, forcement...je pense
     }
 
+    /**
+     *  on vérifie qu'en appuyant sur un voisin dans le recyclerView c'est bien son nom qui s'affiche dans les details, donc qu'il existe
+     */
     @Test
     public void detailNeighbourFirstnameExist() {
         //sur la vue qui affiche la liste des voisins, on effectue une action: on click sur le 5eme (index 4)
@@ -93,4 +96,14 @@ public class NeighboursListTest {
         //a lire a l'enver: on verifie que le texte du nom correspond au texte de l'id du firstname
         onView(ViewMatchers.withId(R.id.detail_firstname)).check(matches(withText("Elodie")));
     }
+
+    /**
+     *  aprés click suppression on verifie que la vue voisin supprimé ne correspond pas a la vue voisin au meme index apres suppression ?
+     */
+
+
+    /**
+     *  on verifie que la vue favoris ne contient que des favoris
+     */
+    //passer par une exploration de l'araylist ?
 }
