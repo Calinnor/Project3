@@ -40,12 +40,12 @@ public class NeighboursListTest {
     private ListNeighbourActivity mActivity;
 
     @Rule
-    public ActivityTestRule<ListNeighbourActivity> mActivityRule =
+    public ActivityTestRule mActivityRule =
             new ActivityTestRule(ListNeighbourActivity.class);
 
     @Before
     public void setUp() {
-        mActivity = mActivityRule.getActivity();
+        mActivity = (ListNeighbourActivity) mActivityRule.getActivity();
         assertThat(mActivity, notNullValue());
     }
 
@@ -70,12 +70,12 @@ public class NeighboursListTest {
         onView(ViewMatchers.withId(R.id.list_neighbours))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(1, new DeleteViewAction()));
         // Then : the number of element is 11
-        onView(ViewMatchers.withId(R.id.list_neighbours)).check(withItemCount(ITEMS_COUNT-1));
+        onView(ViewMatchers.withId(R.id.list_neighbours)).check(withItemCount(ITEMS_COUNT - 1));
 
     }
 
     /**
-     *  on vérifie qu'en appuyant sur la liste des favoris, un element du detail s'affiche
+     * on vérifie qu'en appuyant sur la liste des favoris, un element du detail s'affiche
      */
     @Test
     public void detailNeighbourActivityIsLaunch() {
@@ -87,23 +87,32 @@ public class NeighboursListTest {
     }
 
     /**
-     *  on vérifie qu'en appuyant sur un voisin dans le recyclerView c'est bien son nom qui s'affiche dans les details, donc qu'il existe
+     * on vérifie qu'en appuyant sur un voisin dans le recyclerView c'est bien son nom qui s'affiche dans les details, donc qu'il existe
      */
     @Test
     public void detailNeighbourFirstnameExist() {
-        //sur la vue qui affiche la liste des voisins, on effectue une action: on click sur le 5eme (index 4)
-        onView((ViewMatchers.withId(R.id.list_neighbours))).perform(actionOnItemAtPosition(4, click()));
+        //sur la vue qui affiche la liste des voisins, on effectue une action: on click sur le 2nd (index 1)
+        onView(ViewMatchers.withId(R.id.list_neighbours)).perform(actionOnItemAtPosition(1, click()));
         //a lire a l'enver: on verifie que le texte du nom correspond au texte de l'id du firstname
-        onView(ViewMatchers.withId(R.id.detail_firstname)).check(matches(withText("Elodie")));
+        onView(ViewMatchers.withId(R.id.detail_firstname)).check(matches(withText("Jack")));
     }
 
     /**
-     *  aprés click suppression on verifie que la vue voisin supprimé ne correspond pas a la vue voisin au meme index apres suppression ?
+     * aprés click suppression on verifie que la vue voisin supprimé ne correspond pas a la vue voisin au meme index apres suppression ?
      */
+    @Test
+    public void useDeleteNeighbourButtonDisplayNeighbourListMinusOne() {
+        //on recupere la vue id list qui check with le nombre d'elements de la liste (12)
+        onView(ViewMatchers.withId(R.id.list_neighbours)).check(withItemCount(ITEMS_COUNT));
+        //on recupere la vue id list puis on click sur le bouton delete
+        onView(ViewMatchers.withId(R.id.list_neighbours)).perform(actionOnItemAtPosition(1, click()));
+        //on recupere la vue id list with nombre d'element -1
+        onView(ViewMatchers.withId(R.id.list_neighbours)).check(withItemCount(ITEMS_COUNT-1));
 
 
-    /**
-     *  on verifie que la vue favoris ne contient que des favoris
-     */
-    //passer par une exploration de l'araylist ?
+        /**
+         *  on verifie que la vue favoris ne contient que des favoris
+         */
+        //passer par une exploration de l'araylist ?
+    }
 }
