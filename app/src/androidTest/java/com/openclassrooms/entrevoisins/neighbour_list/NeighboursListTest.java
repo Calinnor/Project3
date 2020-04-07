@@ -25,10 +25,12 @@ import java.util.Random;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.swipeLeft;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
 import static androidx.test.espresso.contrib.ViewPagerActions.scrollRight;
 import static androidx.test.espresso.matcher.ViewMatchers.assertThat;
+import static androidx.test.espresso.matcher.ViewMatchers.hasChildCount;
 import static androidx.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -121,22 +123,26 @@ public class NeighboursListTest {
      */
     @Test
     public void favoriteNeighbourListContainsOnlyFavoriteNeighbour() {
-        //base favorite list is empty. add rondom favorite neighbour (1-12)
+        //on passe un random ir neighbour (1-12) en favorite true
         Random r = new Random();
-        int ri = r.nextInt(11)+1;
-        for(int i = 0; i < ri; i++){
-            mApiService.getNeighbours().get(i).setFavorite(true);
-        }//ici ri voisins sont favoris dans la liste neighbours
-        for(int i = 0; i < ri; i++){
-            favoriteNeighbours = mApiService.getNeighbourIsFavorite();
-        }//ici ri voisins sont dans la liste favoriteNeighbours qui sera instanciée
+        int ir = r.nextInt(11)+1;
+        for (int i=0; i < ir; i++){
+            neighbours.get(i).setFavorite(true);
+        }
+        /**
+         * need launch an activity (detail) then to kill activity for reload neighbourList with favorite param true
+         * i think because at start, neighbour list is initiate with no favorite and in tests add favorite action doesnt initiate favorite param
+         */
+        //a partir du recyclerView neighbour list on lance detail
+        onView(ViewMatchers.withId(R.id.list_neighbours)).perform(actionOnItemAtPosition(0, click()));
+        //on tue l'activité et retourne à main: reload de neighbour list avec les param favorite
+        onView(ViewMatchers.withId(R.id.back_button)).perform(click());
 
-        //on click sur la vue "favorite" affichant la liste des favoris...
-        // a mon avis c'est ce clik qui ne fonctionne pas puisque la list favorite contient bien ri favoris
-        //malheureusement il y a 0...affichés donc on affiche quoi ???..pas la liste de favorite puisqu'elle n'est pas vide.
-        onView(ViewMatchers.withText("Favorites")).perform(click());
+        //on swipe l'activité a gauche (on va a droite) pour afficher favoris
+        onView(ViewMatchers.withId(R.id.main_content)).perform(swipeLeft());
 
-        onView(/*withText("Favorites"))*/withId(R.id.list_favorite_neighbours)).check(withItemCount(ri));
+        //on verifie que le nombre d'item affichés correspond à ir favorite neighbours
+        onView(ViewMatchers.withId(R.id.list_favorite_neighbours)).check(matches(hasChildCount(ir)));
         }
 
 
