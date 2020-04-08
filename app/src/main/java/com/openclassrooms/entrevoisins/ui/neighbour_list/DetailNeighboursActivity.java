@@ -36,6 +36,7 @@ public class DetailNeighboursActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_neighbours);
 
         mApiService = DI.getNeighbourApiService();
+
         mFavoriteButton = findViewById(R.id.detail_add_favorite_neighbour_floating_button);
         ImageButton mbackButton = findViewById(R.id.back_button);
         mbackButton.setOnClickListener(v -> DetailNeighboursActivity.this.finish());

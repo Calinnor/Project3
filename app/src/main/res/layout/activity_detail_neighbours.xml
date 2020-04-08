@@ -155,14 +155,12 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:layout_marginBottom="6dp"
-        android:padding="4dp"
+        android:background="#ECF2F8"
         android:elevation="4dp"
-        app:layout_constraintVertical_weight="35"
+        android:padding="14dp"
         app:cardCornerRadius="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/detail_cardview_one">
 
@@ -181,11 +179,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="1sp"
-                android:text="A propos de moi"
                 android:background="@android:color/white"
                 android:padding="10dp"
+                android:text="A propos de moi"
                 android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
 
             <ScrollView
@@ -195,15 +193,13 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-
                     <TextView
                         android:id="@+id/detail_about_me"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="6dp"
-                        android:paddingLeft="10dp"
-                        android:paddingBottom="4dp"
+                        android:layout_height="match_parent"
                         android:background="@android:color/white"
+                        android:padding="12dp"
+                        android:paddingBottom="16dp"
                         android:text="content about me"
                         android:textSize="14sp" />
                 </LinearLayout>

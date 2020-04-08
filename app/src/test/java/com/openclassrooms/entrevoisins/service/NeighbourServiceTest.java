@@ -154,7 +154,6 @@ public class NeighbourServiceTest {
      *
      * base neighbour list hasn't favorite. expected IndexOutOfBoundsException
      */
-    //TODO test ok when test alone but incorrect with global test
     @Test (expected = IndexOutOfBoundsException.class)
     public void getFavoriteNeighboursWithSuccessFromEmptyList() {
         Neighbour expectedNeighbours = service.getNeighbourIsFavorite().get(5);
