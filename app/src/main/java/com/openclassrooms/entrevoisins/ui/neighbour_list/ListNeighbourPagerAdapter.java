@@ -10,6 +10,8 @@ public class ListNeighbourPagerAdapter extends FragmentPagerAdapter {
     public ListNeighbourPagerAdapter(FragmentManager fm) {
         super(fm);
     }
+    private NeighbourFragment neighbourFragment =  NeighbourFragment.newInstance();
+    private FavoriteNeighbourFragment favoriteNeighbourFragment = FavoriteNeighbourFragment.newInstance();
 
     /**
      * getItem is called to instantiate the fragment for the given page.
@@ -20,13 +22,27 @@ public class ListNeighbourPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return NeighbourFragment.newInstance();
+                return neighbourFragment;
             case 1:
-                return FavoriteNeighbourFragment.newInstance();
+                return favoriteNeighbourFragment;
             default:
                 return null;
         }
     }
+
+ //   @Override
+//    public Fragment getItem(int position) {
+//        switch (position) {
+//            case 0:
+//                return NeighbourFragment.newInstance();
+//            case 1:
+//                return FavoriteNeighbourFragment.newInstance();
+//            default:
+//                return null;
+//        }
+//    }
+
+
 
     /**
      * get the number of pages
