@@ -121,7 +121,7 @@ public class NeighboursListTest {
 
         //on verifie que le nombre d'item affichés correspond à ir favorite neighbours
         onView(ViewMatchers.withId(R.id.list_favorite_neighbours)).check(matches(hasChildCount(ir)));
-        }
+    }
 
 
 
