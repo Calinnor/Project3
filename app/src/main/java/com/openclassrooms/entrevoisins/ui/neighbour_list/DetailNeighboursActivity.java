@@ -2,12 +2,9 @@ package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,61 +13,54 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.model.Neighbour;
-import com.openclassrooms.entrevoisins.service.DummyNeighbourApiService;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
-import java.util.List;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class DetailNeighboursActivity extends AppCompatActivity {
 
+    @BindView(R.id.detail_mail) TextView mail;
+    @BindView(R.id.detail_phone) TextView phone;
+    @BindView(R.id.detail_adress) TextView adress;
+    @BindView(R.id.detail_about_me) TextView aboutMe;
+    @BindView(R.id.detail_firstname) TextView firstname;
+    @BindView(R.id.detail_avatar_view) ImageView avatar;
+    @BindView(R.id.detail_firstname_on_avatar_image) TextView firstnameOnavatar;
+    @BindView(R.id.detail_add_favorite_neighbour_floating_button) FloatingActionButton mFavoriteButton;
+
     private NeighbourApiService mApiService= DI.getNeighbourApiService();
     private Neighbour neighbour;
-    private FloatingActionButton mFavoriteButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_detail_neighbours);
-        mFavoriteButton = findViewById(R.id.detail_add_favorite_neighbour_floating_button);
-
+        ButterKnife.bind(this);
         getNeighbourIntent();
         isAlreadyFavorite();
         updateNeighbour();
         clickFavoriteButton();
         clickBackButton();
-
     }//fin oncreate
 
     private void updateNeighbour(){
-        String getAvatar = neighbour.getAvatarUrl();
-        ImageView avatar = findViewById(R.id.detail_avatar_view);
+        //String getAvatar = neighbour.getAvatarUrl();
+        //ImageView avatar = findViewById(R.id.detail_avatar_view);
         Glide.with(this)
-                .load(getAvatar)
+                .load(neighbour.getAvatarUrl())
                 .into(avatar);
 
-        String getMail = neighbour.getName();
-        TextView mail = findViewById(R.id.detail_mail);
-        mail.setText("www.facebook.com/"+getMail);
+//        String getMail = neighbour.getName();
+//        TextView mail = findViewById(R.id.detail_mail);
+//        mail.setText("www.facebook.com/"+getMail);
 
-        String getPhone = neighbour.getPhoneNumber();
-        TextView phone = findViewById(R.id.detail_phone);
-        phone.setText(getPhone);
-
-        String getAdress = neighbour.getAddress();
-        TextView adress = findViewById(R.id.detail_adress);
-        adress.setText(getAdress);
-
-        String getAboutMe = neighbour.getAboutMe();
-        TextView aboutMe = findViewById(R.id.detail_about_me);
-        aboutMe.setText(getAboutMe);
-
-        String getFirstname =neighbour.getName();
-        TextView firstname = findViewById(R.id.detail_firstname);
-        firstname.setText(getFirstname);
-
-        TextView nameOnAvatar = findViewById(R.id.detail_firstname_on_avatar_image);
-        nameOnAvatar.setText(getFirstname);
+        mail.setText("www.facebook.com/"+neighbour.getName());
+        phone.setText(neighbour.getPhoneNumber());
+        adress.setText(neighbour.getAddress());
+        aboutMe.setText(neighbour.getAboutMe());
+        firstname.setText(neighbour.getName());
+        firstnameOnavatar.setText(neighbour.getName());
     }
 
     private void clickFavoriteButton(){

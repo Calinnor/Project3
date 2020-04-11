@@ -29,15 +29,12 @@ import java.util.Objects;
  */
 public class FavoriteNeighbourFragment extends Fragment {
 
-
         private NeighbourApiService mApiService;
         private RecyclerView mRecyclerView;
-
 
         public static FavoriteNeighbourFragment newInstance() {
             return new FavoriteNeighbourFragment();
         }
-
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
