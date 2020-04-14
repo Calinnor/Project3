@@ -12,8 +12,12 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
+import com.openclassrooms.entrevoisins.events.DisplayDetailActivityEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -91,6 +95,24 @@ public class DetailNeighboursActivity extends AppCompatActivity {
     private void clickBackButton(){
         ImageButton mbackButton = findViewById(R.id.back_button);
         mbackButton.setOnClickListener(v -> DetailNeighboursActivity.this.finish());
+    }
+
+        @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe
+    public void onDisplayDetailActivity(DisplayDetailActivityEvent event){
+        Intent intent = new Intent(this, DetailNeighboursActivity.class);
+        startActivity(intent);
     }
 }
 
