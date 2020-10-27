@@ -1,5 +1,6 @@
 ## _OpenClassrooms_ P3
------
+[![forthebadge](https://forthebadge.com/images/badges/made-with-java.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/built-for-android.svg)](https://forthebadge.com)
+----------
 Ce dépôt contient une mini-application pour le P3 du parcours **Grande École du Numérique**. 
 
 ### Installation
@@ -12,4 +13,4 @@ Ce dépôt contient une mini-application pour le P3 du parcours **Grande École 
 * Selectionner le terminal sur lequel l'application va être installée (emulateur ou appareil connecté)
 * Lancer l'application en utilisant l'onglet run ou toute icone faisant la même fonction
 
-[![forthebadge](https://forthebadge.com/images/badges/made-with-java.svg)](https://forthebadge.com)
+
